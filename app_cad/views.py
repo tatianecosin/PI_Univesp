@@ -2,7 +2,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import cliente
-
+from .forms import ClienteForm
 
 class ListaClienteView(ListView):
     model = cliente
@@ -16,3 +16,19 @@ class ListaClienteView(ListView):
             queryset = queryset.filter(nome_completo__contains=filtro_nome)
             
         return queryset
+
+
+
+class ClienteCreateView(CreateView):
+    model = cliente
+    form_class = ClienteForm
+    success_url = '/app_cad/'
+
+class ClienteUpdateView(UpdateView):
+    model = cliente
+    form_class = ClienteForm
+    success_url = '/app_cad/'
+
+class ClienteDeleteView(DeleteView):
+    model = cliente
+    success_url = '/app_cad/'
